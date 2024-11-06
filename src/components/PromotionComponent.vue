@@ -3,10 +3,11 @@
     <div>
       <div
         class="img1"
-        :style="{ backgroundImage: `url(${promotion.imageSrc})` }"
+        :style="{ backgroundImage: `url(${promotion.image})` }"
       >
-        <p class="text">{{ promotion.text }}</p>
+        <p class="text">{{ promotion.title }}</p>
         <ButtonComponent
+          @click="shopNow(promotion)"
           :style="{ backgroundColor: isHovered ? hoverColor : promotion.buttonColor }"
           @mouseover="isHovered = true"
           @mouseleave="isHovered = false"
@@ -36,6 +37,11 @@ export default {
   components: {
     ButtonComponent,
   },
+  methods:{
+    shopNow(promotion){
+      alert("Let's shop: "+promotion.title);
+    }
+  }
 };
 </script>
 <style>

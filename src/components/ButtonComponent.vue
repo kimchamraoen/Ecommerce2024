@@ -7,7 +7,7 @@ export default{
   props:['button']
 }
 </script>
-<style>
+<style scoped>
 .button {
   height: 2.5rem;
   width: 8rem;
@@ -17,6 +17,6 @@ export default{
   border-radius: 3px;
 }
 .button:hover{
-    background-color: rgb(206, 131, 12);
+    background-color: rgb(231, 158, 42);
 }
 </style>

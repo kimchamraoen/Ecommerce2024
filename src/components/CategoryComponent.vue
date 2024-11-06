@@ -4,13 +4,13 @@
       <div class="">
       <div class="category-inner col-3" :style="{backgroundColor: category.color}">
         <div class="category-image-wrap">
-          <img :src="category.imageSrc" alt="image">
+          <img :src="category.image" alt="image">
         </div>
         <div class="category-text-wrap">
           <h6 class="bg-text text-center">{{ category.title }}</h6>
         </div>
         <div class="category-item-wrap">
-          <p class="text-center">{{ category.item }}</p>
+          <p class="text-center">{{ category.productCount }} items</p>
         </div>
       </div>
     </div>
