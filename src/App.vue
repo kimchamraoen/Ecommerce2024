@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="categorys">
         <category
-          v-for="category in categorys"
+          v-for="category in categories"
           :key="category.color"
           :category="category"
           :backgroundColor="category.color"
@@ -20,30 +20,14 @@
       </div>
     </div>
   </main>
-  <!-- <RouterView /> -->
+  <RouterView />
 </template>
 
 <script>
-import buttonComponent from "./components/ButtonComponent.vue";
-// import Productcomponent from "./components/Product.vue";
 import PromotionComponent from "./components/PromotionComponent.vue";
 import category from "./components/CategoryComponent.vue";
 
-import humbeger from "./assets/images/humbeger.png";
-import fruit from "./assets/images/fruit.png";
-import kiwi from "./assets/images/kiwi.png";
-import Snack from "./assets/images/snach.png";
-import blackplum from "./assets/images/blackplum.png";
-import vegetable from "./assets/images/vegetable.png";
-import headphone from "./assets/images/headphone.png";
-import cock from "./assets/images/cock.png";
-import apple from "./assets/images/apple.png";
-import orange from "./assets/images/orange.png";
-import mixvegetable from "./assets/images/mixvegetable.jpg";
-import frencholine from "./assets/images/frencholine.jpg";
-import red from "./assets/images/red.jpg";
-// import Product from "./components/Product.vue";
-
+import axios from "axios";
 export default {
   name: "app",
   components: {
@@ -54,98 +38,28 @@ export default {
   },
   data() {
     return {
-      categorys: [
-        {
-          image: humbeger,
-          title: "Cake & Milk",
-          productCount: 14,
-          color: "#feefe9",
-        },
-        {
-          // src:require('./assets/images/fruit.png'),
-          image: fruit,
-          title: "Peach",
-          productCount: 17,
-          color: "#fef3e9",
-        },
-        {
-          // src:require('./assets/images/kiwi.png'),
-          image: kiwi,
-          title: "Oganic Kiwi",
-          productCount: 21,
-          color: "#f5fee9",
-        },
-        {
-          // src:require('./assets/images/apple.png'),
-          image: apple,
-          title: "Red Apple",
-          productCount: 68,
-          color: "#feeae9",
-        },
-        {
-          // src:require('./assets/images/snach.png'),
-          image: Snack,
-          title: "Snack",
-          productCount: 34,
-          color: "#fdfee9",
-        },
-        {
-          // src:require('./assets/images/blackplum.png'),
-          image: blackplum,
-          title: "Black Plum",
-          productCount: 25,
-          color: "#f4f4f4",
-        },
-        {
-          // src:require('./assets/images/vegetable.png'),
-          image: vegetable,
-          title: "Vegetables",
-          productCount: 65,
-          color: "#f0fef1",
-        },
-        {
-          // src:require('./assets/images/headphone.png'),
-          image: headphone,
-          title: "Headphone",
-          productCount: 33,
-          color: "#fdfef0",
-        },
-        {
-          // src:require('./assets/images/cock.png'),
-          image: cock,
-          title: "Cake & Milk",
-          productCount: 54,
-          color: "#fef7f0",
-        },
-        {
-          // src:require('./assets/images/orange.png'),
-          image: orange,
-          title: "Orange",
-          productCount: 63,
-          color: "#fefaf0",
-        },
-      ],
-      promotions: [
-        {
-          image: frencholine,
-          title: "Everyday Fresh & clean with our products.",
-          buttonColor: "#25ee18",
-          color:"#fcc744"
-        },
-        {
-          image: red,
-          title: "Make your Breakfast Hearthy and Easy.",
-          buttonColor: "#25ee18",
-          color:"#fcc744"
-        },
-        {
-          image: mixvegetable,
-          title: "The best Organic product Online .",
-          buttonColor: "#25ee18",
-          color:"#fcc744"
-        },
-      ],
+      categories: [],
+      promotions: [],
     };
+  },
+  mounted() {
+    // fetch data category, promotion from backent
+    this.fetchCategoried();
+    this.fetchPromotions();
+  },
+  methods: {
+    fetchCategoried() {
+      axios.get("http://localhost:3000/api/categories").then((result) => {
+        // console.log(result.data);
+        this.categories = result.data;
+      });
+    },
+    fetchPromotions() {
+      axios.get("http://localhost:3000/api/promotions").then((result) => {
+        // console.log(result.data);
+        this.promotions = result.data;
+      });
+    },
   },
 };
 </script>
@@ -169,7 +83,6 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(auto-fit, 1fr));
   gap: 1rem;
   padding: 1rem;
-  
 }
 .promotions {
   display: grid;
@@ -214,7 +127,6 @@ main {
   .promotions {
     grid-template-columns: repeat(1, 1fr);
     margin-left: -35px;
-  
   }
 }
 @media (max-width: 767.98px) {
@@ -234,7 +146,7 @@ main {
   }
   .promotions {
     width: 13rem;
-    margin-left:-2.5rem ;
+    margin-left: -2.5rem;
 
     grid-template-columns: repeat(1, 1fr);
   }

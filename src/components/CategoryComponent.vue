@@ -7,7 +7,7 @@
           <img :src="category.image" alt="image">
         </div>
         <div class="category-text-wrap">
-          <h6 class="bg-text text-center">{{ category.title }}</h6>
+          <h6 class="bg-text text-center">{{ category.name }}</h6>
         </div>
         <div class="category-item-wrap">
           <p class="text-center">{{ category.productCount }} items</p>

@@ -1,14 +1,13 @@
 <template>
   <div class="wrapper">
     <div>
-      <div
-        class="img1"
-        :style="{ backgroundImage: `url(${promotion.image})` }"
-      >
+      <div class="img1" :style="{ backgroundImage: `url(${promotion.image})` }">
         <p class="text">{{ promotion.title }}</p>
         <ButtonComponent
           @click="shopNow(promotion)"
-          :style="{ backgroundColor: isHovered ? hoverColor : promotion.buttonColor }"
+          :style="{
+            backgroundColor: isHovered ? hoverColor : promotion.buttonColor,
+          }"
           @mouseover="isHovered = true"
           @mouseleave="isHovered = false"
         />
@@ -25,7 +24,7 @@ export default {
   data() {
     return {
       isHovered: false,
-      hoverColor: '#FFD700', // Hover color
+      hoverColor: "#FFD700", // Hover color
     };
   },
   props: {
@@ -37,11 +36,11 @@ export default {
   components: {
     ButtonComponent,
   },
-  methods:{
-    shopNow(promotion){
-      alert("Let's shop: "+promotion.title);
-    }
-  }
+  methods: {
+    shopNow(promotion) {
+      alert("Let's shop: " + promotion.title);
+    },
+  },
 };
 </script>
 <style>
