@@ -26,8 +26,11 @@
 <script>
 import PromotionComponent from "./components/PromotionComponent.vue";
 import category from "./components/CategoryComponent.vue";
-
+import {mapState} from 'pinia'
+import { defineStore } from "pinia";
 import axios from "axios";
+import { onMounted } from "vue"; // Import onMounted
+import { useProductStore } from './stores/counter';
 export default {
   name: "app",
   components: {
@@ -38,29 +41,61 @@ export default {
   },
   data() {
     return {
-      categories: [],
-      promotions: [],
+      // categories: [],
+      // promotions: [],
+      currentGroupName: 'Group B'
     };
   },
-  mounted() {
-    // fetch data category, promotion from backent
-    this.fetchCategoried();
-    this.fetchPromotions();
+  setup() {
+    const productStore = useProductStore();
+    
+
+    // Fetch data on mount
+    onMounted(() => {
+      productStore.fetchCategoried();
+      productStore.fetchPromotions();
+      productStore.fetchGroups();
+      productStore.fetchProducts();
+    });
+
+    return {
+      productStore,
+    };
   },
-  methods: {
-    fetchCategoried() {
-      axios.get("http://localhost:3000/api/categories").then((result) => {
-        // console.log(result.data);
-        this.categories = result.data;
-      });
-    },
-    fetchPromotions() {
-      axios.get("http://localhost:3000/api/promotions").then((result) => {
-        // console.log(result.data);
-        this.promotions = result.data;
-      });
-    },
+  // computed:{
+  //   ...mapState(useProductStore, {
+  //     popularProducts:'getPopularProducts',
+  //     categories(store) {
+  //       return this.store.getCategoriesByGroup(this.currentGroupName)
+  //     },
+  //   })
+  // }
+  computed: {
+  categories() {
+    const productStore = useProductStore();
+    return productStore.getCategoriesByGroup(this.currentGroupName);
   },
+},
+
+  // mounted() {
+  //   // fetch data category, promotion from backent
+  //   this.fetchCategoried();
+  //   this.fetchPromotions();
+  // },
+  // methods: {
+  //   fetchCategoried() {
+  //     axios.get("http://localhost:3000/api/categories").then((result) => {
+  //       // console.log(result.data);
+  //       this.categories = result.data;
+  //     });
+  //   },
+  //   fetchPromotions() {
+  //     axios.get("http://localhost:3000/api/promotions").then((result) => {
+  //       // console.log(result.data);
+  //       this.promotions = result.data;
+  //     });
+  //   },
+  // },
 };
 </script>
 
