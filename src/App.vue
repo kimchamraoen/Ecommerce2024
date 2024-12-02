@@ -1,10 +1,16 @@
 <template>
-  <main class="">
+  <main class="container">
+    <div class="flex justify-between my-4">
+      <div class="text-xl font-semibold textProduct">Featured Categories</div>
+      <div class="hidden w-full md:block md:w-auto">
+        <MenuComponent />
+      </div>
+    </div>
     <div class="wrapper">
       <div class="categorys">
         <category
-          v-for="category in categories"
-          :key="category.color"
+          v-for="category in productStore.categories"
+          :key="category.id"
           :category="category"
           :backgroundColor="category.color"
         />
@@ -13,89 +19,57 @@
     <div class="">
       <div class="promotions">
         <PromotionComponent
-          v-for="promotion in promotions"
+          v-for="promotion in productStore.promotions"
           :key="promotion.title"
           :promotion="promotion"
         />
       </div>
     </div>
+    <div class="flex justify-between my-4">
+      <div class="text-xl font-semibold textProduct">Popular Products</div>
+      <div class="hidden w-full md:block md:w-auto">
+        <MenuComponent />
+      </div>
+    </div>
+    <div class="">
+      <div class="product">
+        <ProductComponent
+          
+        />
+      </div>
+    </div>
+    <RouterView />
   </main>
-  <RouterView />
 </template>
 
 <script>
 import PromotionComponent from "./components/PromotionComponent.vue";
 import category from "./components/CategoryComponent.vue";
-import {mapState} from 'pinia'
-import { defineStore } from "pinia";
-import axios from "axios";
-import { onMounted } from "vue"; // Import onMounted
-import { useProductStore } from './stores/counter';
+import ProductComponent from "./components/ProductComponent.vue";
+import MenuComponent from "./components/MenuComponent.vue";
+import { onMounted, computed } from "vue"; // Import onMounted
+import { useProductStore } from "./stores/counter";
+import { mapState } from "pinia";
+
 export default {
   name: "app",
   components: {
     category,
-    // buttonComponent,
     PromotionComponent,
-    // Productcomponent,
-  },
-  data() {
-    return {
-      // categories: [],
-      // promotions: [],
-      currentGroupName: 'Group B'
-    };
+    ProductComponent,
+    MenuComponent,
   },
   setup() {
     const productStore = useProductStore();
-    
 
-    // Fetch data on mount
     onMounted(() => {
       productStore.fetchCategoried();
       productStore.fetchPromotions();
-      productStore.fetchGroups();
-      productStore.fetchProducts();
+      // productStore.fetchProducts();
+      // productStore.fetchGroups();
     });
-
-    return {
-      productStore,
-    };
+    return { productStore };
   },
-  // computed:{
-  //   ...mapState(useProductStore, {
-  //     popularProducts:'getPopularProducts',
-  //     categories(store) {
-  //       return this.store.getCategoriesByGroup(this.currentGroupName)
-  //     },
-  //   })
-  // }
-  computed: {
-  categories() {
-    const productStore = useProductStore();
-    return productStore.getCategoriesByGroup(this.currentGroupName);
-  },
-},
-
-  // mounted() {
-  //   // fetch data category, promotion from backent
-  //   this.fetchCategoried();
-  //   this.fetchPromotions();
-  // },
-  // methods: {
-  //   fetchCategoried() {
-  //     axios.get("http://localhost:3000/api/categories").then((result) => {
-  //       // console.log(result.data);
-  //       this.categories = result.data;
-  //     });
-  //   },
-  //   fetchPromotions() {
-  //     axios.get("http://localhost:3000/api/promotions").then((result) => {
-  //       // console.log(result.data);
-  //       this.promotions = result.data;
-  //     });
-  //   },
-  // },
 };
 </script>
 
@@ -106,7 +80,7 @@ export default {
   box-sizing: border-box;
 }
 main {
-  width: 100%;
+  /* width: 100%; */
   flex-wrap: wrap;
   height: auto;
 }
@@ -116,8 +90,8 @@ main {
 .categorys {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(auto-fit, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
 }
 .promotions {
   display: grid;
@@ -141,8 +115,15 @@ main {
     margin: auto;
     margin-left: -7rem;
   }
+  .product{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-left: -7rem;
+  }
+  .textProduct{
+    margin-left: -6rem;
+  }
 }
-
 @media (max-width: 1199.98px) {
   .categorys {
     display: grid;
@@ -174,7 +155,6 @@ main {
     margin: auto;
   }
 }
-
 @media (max-width: 575.98px) {
   .categorys {
     grid-template-columns: repeat(2, 1fr);

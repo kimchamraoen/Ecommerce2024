@@ -1,8 +1,8 @@
 
 <template>
     <div class="">
-      <div class="">
-      <div class="category-inner col-3" :style="{backgroundColor: category.color}">
+      <div class="category">
+      <div class="category-inner" :style="{backgroundColor: category.color}">
         <div class="category-image-wrap">
           <img :src="category.image" alt="image">
         </div>
@@ -28,8 +28,10 @@
 
 .category-inner {
   width: 8rem;
+  height: 11rem;
   padding: 1rem;
   border-radius: 0.5rem;
+  margin: auto;
 }
 .bg-text {
   margin: auto;
