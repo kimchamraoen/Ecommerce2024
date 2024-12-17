@@ -1,30 +1,19 @@
 <template>
+    <Navbar/>
   <RouterView />
+
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import Navbar from "./components/Navbar.vue";
 
-// export default {
-//   name: "app",
-//   components: {
-//     category,
-//     PromotionComponent,
-//     ProductComponent,
-//     MenuComponent,
-//   },
-//   setup() {
-//     const productStore = useProductStore();
-
-//     onMounted(() => {
-//       productStore.fetchCategoried();
-//       productStore.fetchPromotions();
-//       // productStore.fetchProducts();
-//       // productStore.fetchGroups();
-//     });
-//     return { productStore };
-//   },
-// };
+export default {
+  name: "app",
+  components: {
+    Navbar
+  },
+}
 </script>
 
 <style></style>

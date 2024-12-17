@@ -1,7 +1,9 @@
 <template>
+  
   <div v-for="product in productStore.products" :key="product.categoryId"
     class="card w-full max-w-sm bg-white border border-gray-200 rounded-sm shadow dark:bg-gray-800 dark:border-gray-700 pb-4"
   >
+  <router-link to="/products/:productId">
     <div>
       <!-- <div class="discount rounded bg-green-400 text-white px-2 py-1 ">-17%</div> -->
       <img
@@ -97,7 +99,9 @@
         >
       </div>
     </div>
+    </router-link>
   </div>
+  
 </template>
 <script>
 import { onMounted, computed } from "vue"; // Import onMounted
@@ -120,10 +124,12 @@ import { useProductStore } from "@/stores/counter";
     height: 22rem;
     margin: auto;
     margin-bottom: 2rem;
+    z-index: 0;
   }
   .card img{
     height: 10rem;
     margin: auto;
+    
   }
   .discount{
     width: 4rem;

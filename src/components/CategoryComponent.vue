@@ -1,5 +1,6 @@
 
 <template>
+  <router-link to="/categories/:categoryId">
     <div class="">
       <div class="category">
       <div class="category-inner" :style="{backgroundColor: category.color}">
@@ -15,6 +16,7 @@
       </div>
     </div>
     </div>
+  </router-link>
 </template>
 
 <script>

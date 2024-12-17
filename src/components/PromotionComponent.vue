@@ -1,4 +1,5 @@
 <template>
+  <router-link to="/products/:productId">
   <div class="wrapper">
     <div>
       <div class="img1" :style="{ backgroundImage: `url(${promotion.image})` }">
@@ -14,6 +15,7 @@
       </div>
     </div>
   </div>
+  </router-link>
 </template>
 <script>
 // import { text } from '@fortawesome/fontawesome-svg-core';

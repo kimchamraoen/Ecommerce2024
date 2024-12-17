@@ -1,19 +1,23 @@
 <template>
   <main class="container">
+    <img src="../../public/images/background.jpg" class=" w-full" alt="background">
     <div class="flex justify-between my-4">
       <div class="text-xl font-semibold textProduct">Featured Categories</div>
       <div class="hidden w-full md:block md:w-auto">
         <MenuComponent />
       </div>
     </div>
+
     <div class="wrapper">
       <div class="categorys">
-        <category
+          <category
           v-for="category in productStore.categories"
           :key="category.id"
           :category="category"
           :backgroundColor="category.color"
         />
+       
+        
       </div>
     </div>
     <div class="">
@@ -33,9 +37,7 @@
     </div>
     <div class="">
       <div class="product">
-        <ProductComponent
-          
-        />
+        <ProductComponent/>
       </div>
     </div>
     <RouterView />
@@ -50,7 +52,7 @@ import MenuComponent from "../components/MenuComponent.vue";
 import { onMounted, computed } from "vue"; // Import onMounted
 import { useProductStore } from "../stores/counter";
 import { mapState } from "pinia";
-
+// import Navbar from '../components/Navbar.vue'
 export default {
   name: "app",
   components: {
@@ -58,6 +60,7 @@ export default {
     PromotionComponent,
     ProductComponent,
     MenuComponent,
+  //  Navbar
   },
   setup() {
     const productStore = useProductStore();
@@ -100,6 +103,12 @@ main {
 .Button {
   display: flex;
   flex-direction: row;
+}
+.container{
+  margin-top: 1rem;
+}
+.product:hover{
+  background-color: white;
 }
 
 /* Responsive Media Queries */
