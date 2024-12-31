@@ -1,21 +1,24 @@
 <template>
-    <Navbar/>
-    <Section/>
-    <Footer/>
-    <RouterView/>
+  <div class="border" style="width: 90rem; height: 40rem; margin-left: -7rem">
+    <navbar />
+    <Menu />
+    <Footer />
+    <RouterView />
+  </div>
 </template>
 <script>
 import { RouterLink, RouterView } from "vue-router";
-import Navbar from "./components/navbar.vue";
-import Footer from  './components/Footer.vue';
-import Section from "./views/Section.vue";
+import navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+import Menu from "./components/Menu.vue";
+
 export default {
   name: "app",
   components: {
-    Navbar,
+    navbar,
     Footer,
-    Section
+    Menu,
   },
-}
+};
 </script>
 <style></style>
